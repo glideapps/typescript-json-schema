@@ -1,3 +1,4 @@
+.DS_Store
 .gitattributes
 .github
 .travis.yml
@@ -7,3 +8,4 @@ node_modules
 test/
 typings/
 yarn-error.log
+dist/test/*

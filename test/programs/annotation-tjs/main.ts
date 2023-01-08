@@ -1,4 +1,7 @@
 // All of these formats are defined in this specification: http://json-schema.org/latest/json-schema-validation.html#rfc.section.8.3
+
+interface MyRef {}
+
 interface MyObject {
     /**
      * @TJS-format date-time
@@ -51,7 +54,7 @@ interface MyObject {
     regexPattern: string;
 
     /**
-     * @TJS-pattern ^[a-zA-Z0-9]{4}-abc_123$    
+     * @TJS-pattern ^[a-zA-Z0-9]{4}-abc_123$
      */
     regexPatternWithWhitespace: string;
 
@@ -59,4 +62,29 @@ interface MyObject {
      * @TJS-minimum 5
      */
     oneCharacter: number;
+
+    /**
+     * @TJS-examples ["foo", 1]
+     */
+    examples: string;
+
+    /**
+     * @TJS-hide
+     */
+    booleanAnnotationDefaultValue: string;
+
+    /**
+     * @TJS-hide true
+     */
+    booleanAnnotationWithTrue: string;
+
+    /**
+     * @TJS-hide false
+     */
+    booleanAnnotationWithFalse: string;
+
+    /**
+     * @TJS-ignore
+     */
+    complexWithRefIgnored: MyRef;
 }

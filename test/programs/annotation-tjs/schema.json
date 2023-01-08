@@ -9,6 +9,13 @@
             "format": "email",
             "type": "string"
         },
+        "examples": {
+            "examples": [
+                "foo",
+                1
+            ],
+            "type": "string"
+        },        
         "hostname": {
             "format": "hostname",
             "type": "string"
@@ -48,11 +55,27 @@
         "uriTemplate": {
             "format": "uri-template",
             "type": "string"
+        },
+        "booleanAnnotationDefaultValue": {
+            "hide": true,
+            "type": "string"
+        },
+        "booleanAnnotationWithTrue": {
+            "hide": true,
+            "type": "string"
+        },
+        "booleanAnnotationWithFalse": {
+            "hide": false,
+            "type": "string"
         }
     },
     "required": [
+        "booleanAnnotationDefaultValue",
+        "booleanAnnotationWithFalse",
+        "booleanAnnotationWithTrue",
         "dateTime",
         "email",
+        "examples",
         "hostname",
         "ipv4",
         "ipv6",

@@ -3,6 +3,8 @@ import { exec, getDefaultArgs } from "./typescript-json-schema";
 export function run() {
     var helpText = "Usage: typescript-json-schema <path-to-typescript-files-or-tsconfig> <type>";
     const defaultArgs = getDefaultArgs();
+
+    // prettier-ignore
     var args = require("yargs")
         .usage(helpText)
         .demand(2)
@@ -20,12 +22,14 @@ export function run() {
             .describe("noExtraProps", "Disable additional properties in objects by default.")
         .boolean("propOrder").default("propOrder", defaultArgs.propOrder)
             .describe("propOrder", "Create property order definitions.")
-        .boolean("typeOfKeyword").default("typeOfKeyword", defaultArgs.typeOfKeyword)
-            .describe("typeOfKeyword", "Use typeOf keyword (https://goo.gl/DC6sni) for functions.")
+        .boolean("useTypeOfKeyword").default("useTypeOfKeyword", defaultArgs.typeOfKeyword)
+            .describe("useTypeOfKeyword", "Use typeOf keyword (https://goo.gl/DC6sni) for functions.")
         .boolean("required").default("required", defaultArgs.required)
             .describe("required", "Create required array for non-optional properties.")
         .boolean("strictNullChecks").default("strictNullChecks", defaultArgs.strictNullChecks)
             .describe("strictNullChecks", "Make values non-nullable by default.")
+        .boolean("esModuleInterop").default("esModuleInterop", defaultArgs.esModuleInterop)
+            .describe("esModuleInterop", "Use esModuleInterop when loading typescript modules.")
         .boolean("ignoreErrors").default("ignoreErrors", defaultArgs.ignoreErrors)
             .describe("ignoreErrors", "Generate even if the program has errors.")
         .alias("out", "o")
@@ -42,6 +46,11 @@ export function run() {
             .describe("rejectDateType", "Rejects Date fields in type definitions.")
         .string("id").default("id", defaultArgs.id)
             .describe("id", "ID of schema.")
+        .option("defaultNumberType").choices("defaultNumberType", ["number", "integer"])
+            .default("defaultNumberType", defaultArgs.defaultNumberType)
+            .describe("defaultNumberType", "Default number type.")
+        .boolean("tsNodeRegister").default("tsNodeRegister", defaultArgs.tsNodeRegister)
+            .describe("tsNodeRegister", "Use ts-node/register (needed for requiring typescript files).")
         .argv;
 
     exec(args._[0], args._[1], {
@@ -55,6 +64,7 @@ export function run() {
         typeOfKeyword: args.useTypeOfKeyword,
         required: args.required,
         strictNullChecks: args.strictNullChecks,
+        esModuleInterop: args.esModuleInterop,
         ignoreErrors: args.ignoreErrors,
         out: args.out,
         validationKeywords: args.validationKeywords,
@@ -63,6 +73,8 @@ export function run() {
         uniqueNames: args.uniqueNames,
         rejectDateType: args.rejectDateType,
         id: args.id,
+        defaultNumberType: args.defaultNumberType,
+        tsNodeRegister: args.tsNodeRegister,
     });
 }
 
